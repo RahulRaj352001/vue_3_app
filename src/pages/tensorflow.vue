@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { ref } from "@vue/runtime-core";
+import {onBeforeUnmount, ref } from "@vue/runtime-core";
 
 require("@tensorflow/tfjs-backend-cpu");
 require("@tensorflow/tfjs-backend-webgl");
@@ -108,6 +108,10 @@ export default {
         });
       }
     }
+
+    onBeforeUnmount(() => {
+      stopstreaming()
+    })
 
     return { imgref,snapshot, result, detect, isloading, opencamera, videoref,isStreaming ,stopstreaming};
   },
